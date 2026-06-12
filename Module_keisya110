@@ -53,6 +53,8 @@ def transpose(matriks):
     for i in range(b):
         for j in range(k):
             hasil[j][i] = matriks[i][j]
+    for baris in hasil:
+        print(" ".join(map(str, baris)))
     return hasil
 
 def invers(matriks):
