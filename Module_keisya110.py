@@ -56,33 +56,6 @@ def transpose(matriks):
     for baris in hasil:
         print(" ".join(map(str, baris)))
 
-def invers(matriks):
-    b, k = ukuran(matriks)
-    if b != k:
-        raise ValueError("Invers hanya bisa dihitung untuk matriks persegi!")
-    n = b
-    augmentasi = buat(n, 2 * n)
-    for i in range(n):
-        for j in range(n):
-            augmentasi[i][j] = matriks[i][j]
-        augmentasi[i][i + n] = 1.0
-    for i in range(n):
-        if augmentasi[i][i] == 0:
-            raise ValueError("Matriks tidak memiliki invers.")
-        faktor_diagonal = augmentasi[i][i]
-        for j in range(2 * n):
-            augmentasi[i][j] /= faktor_diagonal
-        for k in range(n):
-            if k != i:
-                faktor_nol = augmentasi[k][i]
-                for j in range(2 * n):
-                    augmentasi[k][j] -= faktor_nol * augmentasi[i][j]
-    hasil_invers = buat(n, n)
-    for i in range(n):
-        for j in range(n):
-            hasil_invers[i][j] = round(augmentasi[i][j + n], 4)
-    return hasil_invers
-
 def ambil_submatriks(matriks, baris_diabaikan, kolom_diabaikan):
     return [
         [matriks[i][j] for j in range(len(matriks[i])) if j != kolom_diabaikan]
